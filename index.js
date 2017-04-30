@@ -3,6 +3,7 @@ var commandLineArgs = require("command-line-args");
 
 var cmdArgs = require("./cmdArgs.js");
 var file = require("./file.js");
+var midiSimplifier = require("./midiSimplifier.js");
 
 const optionDefinitions = [
     {name: 'source', alias: 's', type: String},
@@ -14,28 +15,18 @@ const optionDefinitions = [
 const cmdOptions = commandLineArgs(optionDefinitions);
 cmdArgs.build(cmdOptions);
 
-file.openMidi(cmdOptions.source).then((blob) => {
-    let midi = MidiConvert.parse(blob);
-    console.log(midi);
-});
 
-
-
-
-// function parse(blob) {
-//     let parsedMidi = MidiConvert.parse(blob);
-//     return parsedMidi;
-// }
-
-// function simplify(json) {
-    
-//     return json;
-// }
-
-
-
-// function saveAsMidi(path, content) {
-//     return new Promise((resolve, reject) => {
-//         fs.writeFileSync(path, content.encode(), "binary");
-//     });
-// }
+file.openMidi(cmdOptions.source)
+    .then((blob) => {
+        let midi = MidiConvert.parse(blob);
+        return file.saveJson(cmdOptions.originaljson, midi);
+    })
+    .then((jsonedMidi) => {
+        return midiSimplifier.simplify(jsonedMidi);
+    })
+    .then((simplifiedMidi) => {
+        return file.saveJson(cmdOptions.simplifiedjson, simplifiedMidi)
+    })
+    .then((simplifiedMidi) => {
+        console.log("it's' finished, don't know what to say");
+    });

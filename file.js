@@ -14,7 +14,15 @@ const file = {
     saveJson: (path, content) => {
         return new Promise((resolve, reject) => {
             fs.writeFile(path, JSON.stringify(content, null, 2), (err) => {
-                err ? reject(err) : resolver();
+                err ? reject(err) : resolve(content);
+            });
+        });
+    },
+
+    saveMidi: (path, content) => {
+        return new Promise((resolve, reject) => {
+            fs.writeFile(path, content.encode(), "binary", (err) => {
+                err ? reject(err) : resolve(content);
             });
         });
     }
