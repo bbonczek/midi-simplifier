@@ -16,6 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "chai": "^3.5.0",
+    "command-line-args": "^4.0.3",
     "fs": "0.0.1-security",
     "midiconvert": "^0.4.1",
     "path": "^0.12.7"
