@@ -1,4 +1,4 @@
-var MidiConvert = require("midiconvert");
+    var MidiConvert = require("midiconvert");
 var commandLineArgs = require("command-line-args");
 
 var cmdArgs = require("./cmdArgs.js");
@@ -17,16 +17,16 @@ cmdArgs.build(cmdOptions);
 
 
 file.openMidi(cmdOptions.source)
-    .then((blob) => {
+    .then((blob) => {                                                           // create special 'MidiConvert' object
         let midi = MidiConvert.parse(blob);
         return file.saveJson(cmdOptions.originaljson, midi);
     })
-    .then((jsonedMidi) => {
+    .then((jsonedMidi) => {                                                     // simplify to neuron-friendly format
         return midiSimplifier.simplify(jsonedMidi);
     })
-    .then((simplifiedMidi) => {
+    .then((simplifiedJsonedMidi) => {                                           // save as json & as midi
         return file.saveJson(cmdOptions.simplifiedjson, simplifiedMidi)
     })
-    .then((simplifiedMidi) => {
-        console.log("it's' finished, don't know what to say");
+    .then((simplifiedJsonedMidi) => {
+        return file.saveMidi(cmdOptions.target, simplifiedJsonedMidi);
     });
