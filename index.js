@@ -1,4 +1,4 @@
-    var MidiConvert = require("midiconvert");
+var MidiConvert = require("midiconvert");
 var commandLineArgs = require("command-line-args");
 
 var cmdArgs = require("./cmdArgs.js");
@@ -25,7 +25,7 @@ file.openMidi(cmdOptions.source)
         return midiSimplifier.simplify(jsonedMidi);
     })
     .then((simplifiedJsonedMidi) => {                                           // save as json & as midi
-        return file.saveJson(cmdOptions.simplifiedjson, simplifiedMidi)
+        return file.saveJson(cmdOptions.simplifiedjson, simplifiedJsonedMidi)
     })
     .then((simplifiedJsonedMidi) => {
         return file.saveMidi(cmdOptions.target, simplifiedJsonedMidi);

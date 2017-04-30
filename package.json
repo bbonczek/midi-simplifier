@@ -1,7 +1,7 @@
 {
   "name": "midi-simplifier",
   "version": "1.0.0",
-  "description": "Simple library allowing to simplify MIDI files to more easy for machine learning format.",
+  "description": "Simple command-line tool allowing to simplify MIDI files to more easy for machine learning format.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
