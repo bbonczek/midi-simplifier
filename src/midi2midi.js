@@ -13,7 +13,7 @@ const optionDefinitions = [
 ];
 
 const cmdOptions = commandLineArgs(optionDefinitions);
-cmdArgs.build(cmdOptions);
+cmdArgs.build(cmdOptions, "midi2midi");
 
 
 file.openMidi(cmdOptions.source)
