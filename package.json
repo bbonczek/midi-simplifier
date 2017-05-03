@@ -20,5 +20,8 @@
     "fs": "0.0.1-security",
     "midiconvert": "^0.4.1",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "mocha": "^3.3.0"
   }
 }
