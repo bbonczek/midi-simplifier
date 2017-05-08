@@ -11,17 +11,23 @@ const optionDefinitions = [
     {name: 'simplifiedjson', type: String}
 ];
 
+console.log(optionDefinitions);
+
 const cmdOptions = commandLineArgs(optionDefinitions);
 cmdArgs.build(cmdOptions, "json2midi");
 
 
 
 file.openJson(cmdOptions.source)
-    .then((blob) => {                                                           // create special 'MidiConvert' object
-        // should convert json to MidiConvert object
+    .then((json) => {
+        return midiSimplifier.simplify(json);
     })
-    .then((midi) => {
-        // should save midiObject as midi file in cmdArgs.target location    
+    .then((simplifiedJson) => {
+        return file.saveJson(cmdOptions.simplifiedjson, simplifiedJson)
+    })
+    .then((simplifiedJson) => {
+        let midi = MidiConvert.fromJSON(simplifiedJson);
+        return file.saveMidi(cmdOptions.target, midi);
     });
 
    
